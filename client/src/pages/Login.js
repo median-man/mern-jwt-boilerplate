@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
+
 import { useAuth } from "../utils/auth";
+import FullPageSpinner from "../components/FullPageSpinner";
+import LoginAlert from "../components/LoginAlert";
+import {
+  EmailInputGroup,
+  PasswordInputGroup
+} from "../components/FormControls";
 
 const Login = () => {
   const { login, isPending, isLoggedIn, error } = useAuth();
@@ -8,7 +15,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const handleSubmit = e => {
     e.preventDefault();
-    // onSubmit(email, password);
     login(email, password);
   };
 
@@ -17,43 +23,31 @@ const Login = () => {
   }
 
   if (isPending) {
-    return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
-    );
+    return <FullPageSpinner text="Verifying account..." />;
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="container vh-100 text-center d-flex align-items-center flex-column">
+      <form className="form-login m-auto" onSubmit={handleSubmit}>
+        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <EmailInputGroup
+          required
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <PasswordInputGroup
+          required
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <button type="submit" className="my-3 btn btn-lg btn-primary btn-block">
+          Log In
+        </button>
         <div>
-          <label htmlFor="email">Email </label>
-          <input
-            required
-            id="email"
-            name="email"
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
+          <Link to="/signup">Create an account</Link>
         </div>
-        <div>
-          <label htmlFor="password">Password </label>
-          <input
-            required
-            id="password"
-            name="password"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </div>
-        <br />
-        <button type="submit">Submit</button> <Link to="/signup">Sign up</Link>
+        {error && <LoginAlert error={error} />}
       </form>
-      {error && <p>{error}</p>}
     </div>
   );
 };

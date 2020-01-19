@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useAuth } from "../utils/auth";
+import {
+  EmailInputGroup,
+  PasswordInputGroup
+} from "../components/FormControls";
+import LoginAlert from "../components/LoginAlert";
+import FullPageSpinner from "../components/FullPageSpinner";
 
 const Signup = () => {
   const { isLoggedIn, isPending, signup, error } = useAuth();
@@ -17,46 +23,32 @@ const Signup = () => {
   }
 
   if (isPending) {
-    return (
-      <div>
-        <h1>Creating your account...</h1>
-      </div>
-    );
+    return <FullPageSpinner text="Creating account..." />;
   }
 
   return (
-    <div>
-      <h1>Signup</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="container vh-100 text-center d-flex align-items-center">
+      <form className="form-login m-auto" onSubmit={handleSubmit}>
+        <h1 className="h3 mb-3 font-weight-normal">Create a new account</h1>
+        <EmailInputGroup
+          required
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <PasswordInputGroup
+          required
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+
+        <button type="submit" className="my-3 btn btn-lg btn-primary btn-block">
+          Sign up
+        </button>
         <div>
-          <label htmlFor="email">Email </label>
-          <input
-            required
-            id="email"
-            name="email"
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password </label>
-          <input
-            required
-            id="password"
-            name="password"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Submit</button>
-        <br />
-        <p>
           Already have an account? <Link to="/login">Login</Link>
-        </p>
+        </div>
+        {error && <LoginAlert error={error} />}
       </form>
-      {error && <p>{error}</p>}
     </div>
   );
 };
