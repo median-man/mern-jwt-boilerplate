@@ -1,5 +1,4 @@
 {
   "prettier.semi": true,
-  "prettier.singleQuote": false,
-  "prettier.prettierPath": "F:\\code\\project-time-tracker\\node_modules\\prettier"
+  "prettier.singleQuote": false
 }
