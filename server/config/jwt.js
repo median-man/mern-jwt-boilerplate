@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { SECRET } = process.env;
+let { SECRET } = process.env;
 const ONE_DAY = "1d";
 
 module.exports = {
