@@ -54,6 +54,7 @@ const authReducer = (state, action) => {
     case LOGOUT:
       return {
         ...state,
+        isBoss: false,
         isLoggedIn: false,
         isPending: false,
         user: null

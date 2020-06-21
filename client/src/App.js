@@ -17,9 +17,9 @@ function App() {
           <ProtectedRoute exact path="/" onFailureRedirectToPath="/login">
             <Employeehome />
           </ProtectedRoute>
-          <Route exact path="/boss">
+          <ProtectedRoute exact path="/boss" onFailureRedirectToPath="/login">
             <Bosshome />
-          </Route>
+          </ProtectedRoute>
           <Route exact path="/login">
             <Login />
           </Route>
