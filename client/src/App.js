@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { AuthProvider } from "./utils/auth";
 
-import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Employeehome from "./pages/Employeehome";
+import Bosshome from "./pages/Bosshome";
 
 function App() {
   return (
@@ -14,8 +15,11 @@ function App() {
       <Router>
         <Switch>
           <ProtectedRoute exact path="/" onFailureRedirectToPath="/login">
-            <Home />
+            <Employeehome />
           </ProtectedRoute>
+          <Route exact path="/boss">
+            <Bosshome />
+          </Route>
           <Route exact path="/login">
             <Login />
           </Route>
