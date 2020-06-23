@@ -89,9 +89,9 @@ export const AuthProvider = props => {
       });
   };
 
-  const signup = (email, password) => {
+  const signup = (email, password, firstName, lastName) => {
     dispatch({ type: PENDING });
-    AuthService.signup(email, password)
+    AuthService.signup(email, password, firstName, lastName)
       .then(() => login(email, password))
       .catch(error => {
         console.log(error);
