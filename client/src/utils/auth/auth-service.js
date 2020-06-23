@@ -31,6 +31,7 @@ export const signup = (email, password) => {
 export const login = (email, password) => {
   return axios.post("/auth/login", { email, password }).then(res => {
     token.set(res.data.token);
+
     return token.payload();
   });
 };
@@ -44,6 +45,7 @@ export const isLoggedIn = () => {
   const isNotExpired = token.payload().exp > Date.now() / 1000;
   return isNotExpired;
 };
+
 
 export const user = () => {
   if (isLoggedIn()) {
