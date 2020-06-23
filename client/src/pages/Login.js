@@ -10,7 +10,7 @@ import {
 } from "../components/FormControls";
 
 const Login = () => {
-  const { login, isPending, isLoggedIn, error } = useAuth();
+  const { login, isPending, isLoggedIn, isBoss, error } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmit = e => {
@@ -19,7 +19,11 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    return <Redirect to="/" />;
+    if (isBoss) {
+      return <Redirect to="/boss" />;
+    } else {
+      return <Redirect to="/" />;
+    }
   }
 
   if (isPending) {

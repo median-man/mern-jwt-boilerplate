@@ -1,12 +1,19 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
 import * as AuthService from "./auth-service";
-import { ERROR, LOGIN_SUCCESS, LOGOUT, PENDING } from "./actions";
+import {
+  ERROR,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  PENDING,
+  BOSS_LOGIN_SUCCESS
+} from "./actions";
 
 export * from "./auth-service";
 
 const initialAuthState = {
   isLoggedIn: false,
   user: null,
+  isBoss: false,
   isPending: false,
   error: ""
 };
@@ -41,9 +48,19 @@ const authReducer = (state, action) => {
         error: "",
         isPending: false
       };
+    case BOSS_LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isBoss: true,
+        user: action.user,
+        error: "",
+        isPending: false
+      };
     case LOGOUT:
       return {
         ...state,
+        isBoss: false,
         isLoggedIn: false,
         isPending: false,
         user: null
@@ -79,7 +96,13 @@ export const AuthProvider = props => {
     dispatch({ type: PENDING });
     return AuthService.login(email, password)
       .then(() => AuthService.user())
-      .then(user => dispatch({ type: LOGIN_SUCCESS, user }))
+      .then(user => {
+        if (user.boss) {
+          dispatch({ type: BOSS_LOGIN_SUCCESS, user });
+        } else {
+          dispatch({ type: LOGIN_SUCCESS, user });
+        }
+      })
       .catch(error => {
         console.log(error);
         dispatch({

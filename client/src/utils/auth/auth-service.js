@@ -37,6 +37,7 @@ export const signup = (email, password, firstName, lastName, phoneNumber) => {
 export const login = (email, password) => {
   return axios.post("/auth/login", { email, password }).then(res => {
     token.set(res.data.token);
+
     return token.payload();
   });
 };

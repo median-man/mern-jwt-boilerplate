@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("../config/mongoose");
 
-const SALT_ROUNDS = 12;
+const SALT_ROUNDS = 8;
 
 const { Schema } = mongoose;
 const { Types } = Schema;
@@ -26,6 +26,11 @@ const userSchema = new Schema({
   lastName: {
     type: String,
     required: true
+  },
+  boss: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 
@@ -33,7 +38,7 @@ userSchema.pre("save", function() {
   if (!this.isModified("password")) {
     return Promise.resolve();
   }
-  if (this.password.length < 12) {
+  if (this.password.length < 8) {
     return Promise.reject(
       new Error("Password must have at least 12 characters")
     );
