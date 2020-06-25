@@ -7,8 +7,8 @@ const Bosshome = () => {
   return (
     <div className="jumbotron vh-100 vw-100 d-flex align-items-center">
       <div className="container">
-        <h1 className="h3">{user && user.email}</h1>
-        <p>Hey, Welcome to the Thunder Dome Bitch Boss!</p>
+        <h1 className="h3"> Hey {user && user.firstName}</h1>
+        <p>Welcome to the Thunder Dome!</p>
 
         <button className="btn btn-primary btn-block" onClick={logout}>
           Logout

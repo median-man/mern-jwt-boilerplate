@@ -112,9 +112,9 @@ export const AuthProvider = props => {
       });
   };
 
-  const signup = (email, password, firstName, lastName) => {
+  const signup = (email, password, firstName, lastName, phoneNumber) => {
     dispatch({ type: PENDING });
-    AuthService.signup(email, password, firstName, lastName)
+    AuthService.signup(email, password, firstName, lastName, phoneNumber)
       .then(() => login(email, password))
       .catch(error => {
         console.log(error);

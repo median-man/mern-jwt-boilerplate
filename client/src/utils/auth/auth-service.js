@@ -24,12 +24,16 @@ export const addAuthHeader = config => {
   return config;
 };
 
-export const signup = (email, password, firstName, lastName) => {
+
+export const signup = (email, password, firstName, lastName, boss, phoneNumber) => {
+
   return axios.post("/api/users", {
     email,
     password,
     firstName,
-    lastName
+    lastName,
+    boss,
+    phoneNumber
   });
 };
 
