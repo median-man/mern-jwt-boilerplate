@@ -11,7 +11,7 @@ const {
 } = require("./utils/http-status-codes");
 
 const app = express();
-app.set("port", process.env.PORT || 3001);
+app.set("port", process.env.PORT || 3007);
 app.use(logger("dev"));
 app.use(express.json());
 
@@ -39,16 +39,19 @@ app.post("/auth/login", (req, res) => {
 });
 
 app.post("/api/users", (req, res) => {
-  const { email, password } = req.body;
-  User.create({ email, password })
+  const { email, password, firstName, lastName } = req.body;
+  //Fetch from usertable to make sure no duplicates-
+  User.findOne({ email }).then(user => {
+    if (user){
+    return res.status(BAD_REQUEST).send("Account already exists.");
+    }
+    User.create({ email, password, firstName, lastName })
     .then(user => res.end())
     .catch(error => {
       const DUPLICATE_KEY_ERROR_CODE = 11000;
       const { name, code, path } = error;
       if (name === "MongoError" && code === DUPLICATE_KEY_ERROR_CODE) {
-        res
-          .status(BAD_REQUEST)
-          .send("Email invalid or account already exists.");
+        res.status(BAD_REQUEST).send("Email invalid");
       }
       if (name === "ValidationError") {
         res.status(BAD_REQUEST).send("Invalid email or password format.");
@@ -58,6 +61,11 @@ app.post("/api/users", (req, res) => {
       }
       res.status(SERVER_ERROR).end();
     });
+
+})
+  .catch(err => {
+    console.log(err)
+  });
 });
 
 app.get("/api/users/:id", authenticate(), (req, res) => {

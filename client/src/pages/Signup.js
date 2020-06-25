@@ -3,7 +3,9 @@ import { Link, Redirect } from "react-router-dom";
 import { useAuth } from "../utils/auth";
 import {
   EmailInputGroup,
-  PasswordInputGroup
+  PasswordInputGroup,
+  FirstNameInputGroup,
+  LastNameInputGroup
 } from "../components/FormControls";
 import LoginAlert from "../components/LoginAlert";
 import FullPageSpinner from "../components/FullPageSpinner";
@@ -12,10 +14,12 @@ const Signup = () => {
   const { isLoggedIn, isPending, signup, error } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstname] = useState("");
+  const [lastName, setLastname] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    signup(email, password);
+    signup(email, password, firstName, lastName);
   };
 
   if (isLoggedIn) {
@@ -35,10 +39,23 @@ const Signup = () => {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
+        <b></b>
         <PasswordInputGroup
           required
           value={password}
           onChange={e => setPassword(e.target.value)}
+        />
+
+        <FirstNameInputGroup
+          required
+          value={firstName}
+          onChange={e => setFirstname(e.target.value)}
+        />
+        <b></b>
+        <LastNameInputGroup
+          required
+          value={lastName}
+          onChange={e => setLastname(e.target.value)}
         />
 
         <button type="submit" className="my-3 btn btn-lg btn-primary btn-block">

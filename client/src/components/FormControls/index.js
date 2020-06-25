@@ -30,3 +30,25 @@ export const PasswordInputGroup = props => (
     {...props}
   />
 );
+
+export const FirstNameInputGroup = props => (
+  <BaseInputGroup
+    labelText={"First Name"}
+    id="firstName"
+    name="firstName"
+    type="firstName"
+    className="form-control"
+    {...props}
+  />
+);
+
+export const LastNameInputGroup = props => (
+  <BaseInputGroup
+    labelText={"Last Name"}
+    id="lastName"
+    name="lastName"
+    type="lastName"
+    className="form-control"
+    {...props}
+  />
+);

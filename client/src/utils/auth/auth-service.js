@@ -24,8 +24,13 @@ export const addAuthHeader = config => {
   return config;
 };
 
-export const signup = (email, password) => {
-  return axios.post("/api/users", { email, password });
+export const signup = (email, password, firstName, lastName) => {
+  return axios.post("/api/users", {
+    email,
+    password,
+    firstName,
+    lastName
+  });
 };
 
 export const login = (email, password) => {
@@ -45,7 +50,6 @@ export const isLoggedIn = () => {
   const isNotExpired = token.payload().exp > Date.now() / 1000;
   return isNotExpired;
 };
-
 
 export const user = () => {
   if (isLoggedIn()) {
