@@ -1,6 +1,12 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
 import * as AuthService from "./auth-service";
-import { ERROR, LOGIN_SUCCESS, LOGOUT, PENDING, BOSS_LOGIN_SUCCESS } from "./actions";
+import {
+  ERROR,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  PENDING,
+  BOSS_LOGIN_SUCCESS
+} from "./actions";
 
 export * from "./auth-service";
 
@@ -92,9 +98,9 @@ export const AuthProvider = props => {
       .then(() => AuthService.user())
       .then(user => {
         if (user.boss) {
-          dispatch({ type: BOSS_LOGIN_SUCCESS, user })
+          dispatch({ type: BOSS_LOGIN_SUCCESS, user });
         } else {
-          dispatch({ type: LOGIN_SUCCESS, user })
+          dispatch({ type: LOGIN_SUCCESS, user });
         }
       })
       .catch(error => {
@@ -106,9 +112,9 @@ export const AuthProvider = props => {
       });
   };
 
-  const signup = (email, password) => {
+  const signup = (email, password, firstName, lastName) => {
     dispatch({ type: PENDING });
-    AuthService.signup(email, password)
+    AuthService.signup(email, password, firstName, lastName)
       .then(() => login(email, password))
       .catch(error => {
         console.log(error);

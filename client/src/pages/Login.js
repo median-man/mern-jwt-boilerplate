@@ -19,10 +19,10 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    if(isBoss) {
-      return <Redirect to="/boss" />
-    }else {
-    return <Redirect to="/" />;
+    if (isBoss) {
+      return <Redirect to="/boss" />;
+    } else {
+      return <Redirect to="/" />;
     }
   }
 

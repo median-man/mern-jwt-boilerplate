@@ -19,6 +19,14 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
   boss: {
     type: Boolean,
     required: true,
@@ -32,7 +40,7 @@ userSchema.pre("save", function() {
   }
   if (this.password.length < 8) {
     return Promise.reject(
-      new Error("Password must have at least 12 characters")
+      new Error("Password must have at least 8 characters")
     );
   }
   return bcrypt.hash(this.password, SALT_ROUNDS).then(hash => {
