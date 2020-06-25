@@ -42,9 +42,10 @@ app.post("/api/users", (req, res) => {
   const { email, password, firstName, lastName } = req.body;
   //Fetch from usertable to make sure no duplicates-
   User.findOne({ email }).then(user => {
-    res.status(BAD_REQUEST).send("Account already exists.");
-  });
-  User.create({ email, password, firstName, lastName })
+    if (user){
+    return res.status(BAD_REQUEST).send("Account already exists.");
+    }
+    User.create({ email, password, firstName, lastName })
     .then(user => res.end())
     .catch(error => {
       const DUPLICATE_KEY_ERROR_CODE = 11000;
@@ -60,6 +61,11 @@ app.post("/api/users", (req, res) => {
       }
       res.status(SERVER_ERROR).end();
     });
+
+})
+  .catch(err => {
+    console.log(err)
+  });
 });
 
 app.get("/api/users/:id", authenticate(), (req, res) => {
