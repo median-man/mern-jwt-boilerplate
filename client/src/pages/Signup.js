@@ -5,21 +5,23 @@ import {
   EmailInputGroup,
   PasswordInputGroup,
   FirstNameInputGroup,
-  LastNameInputGroup
+  LastNameInputGroup,
+  PhoneNumberInputGroup
 } from "../components/FormControls";
 import LoginAlert from "../components/LoginAlert";
 import FullPageSpinner from "../components/FullPageSpinner";
 
 const Signup = () => {
-  const { isLoggedIn, isPending, signup, error } = useAuth();
+  const { isLoggedIn, isPending, isBoss, signup, error } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
+  const [phoneNumber, setPhonenumber] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    signup(email, password, firstName, lastName);
+    signup(email, password, firstName, lastName, phoneNumber);
   };
 
   if (isLoggedIn) {
@@ -56,6 +58,12 @@ const Signup = () => {
           required
           value={lastName}
           onChange={e => setLastname(e.target.value)}
+        />
+
+        <PhoneNumberInputGroup
+          required
+          value={phoneNumber}
+          onChange={e => setPhonenumber(e.target.value)}
         />
 
         <button type="submit" className="my-3 btn btn-lg btn-primary btn-block">

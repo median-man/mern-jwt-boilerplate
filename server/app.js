@@ -39,12 +39,12 @@ app.post("/auth/login", (req, res) => {
 });
 
 app.post("/api/users", (req, res) => {
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, firstName, lastName, boss } = req.body;
   //Fetch from usertable to make sure no duplicates-
   User.findOne({ email }).then(user => {
     res.status(BAD_REQUEST).send("Account already exists.");
   });
-  User.create({ email, password, firstName, lastName })
+  User.create({ email, password, firstName, lastName, boss })
     .then(user => res.end())
     .catch(error => {
       const DUPLICATE_KEY_ERROR_CODE = 11000;
