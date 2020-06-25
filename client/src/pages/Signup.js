@@ -12,7 +12,7 @@ import LoginAlert from "../components/LoginAlert";
 import FullPageSpinner from "../components/FullPageSpinner";
 
 const Signup = () => {
-  const { isLoggedIn, isPending, signup, error } = useAuth();
+  const { isLoggedIn, isPending, isBoss, signup, error } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstname] = useState("");
