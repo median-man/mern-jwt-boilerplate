@@ -1,4 +1,13 @@
 .navbar {
     color: rgba(83, 228, 83, 0.959);
     background-color: rgba(24, 23, 23, 0.795);
+    z-index: 10;
 }
+/* .list-group {
+    margin-top: 1000px;
+    z-index: -100;
+}
+.above-list{
+    margin-top: 1000px;
+    z-index: 11;
+} */
