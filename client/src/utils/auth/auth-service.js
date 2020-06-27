@@ -61,3 +61,4 @@ export const user = () => {
 };
 
 export const fetchUserData = () => user();
+

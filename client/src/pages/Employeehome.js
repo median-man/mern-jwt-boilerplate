@@ -5,7 +5,7 @@ import Nav from "../components/Nav/index";
 
 const Employeehome = () => {
   const { user, logout } = useAuth();
-  console.log(user)
+
   return (
     <div>
      <Nav

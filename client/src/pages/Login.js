@@ -22,7 +22,7 @@ const Login = () => {
     if (isBoss) {
       return <Redirect to="/boss" />;
     } else {
-      return <Redirect to="/" />;
+      return <Redirect to="/employee" />;
     }
   }
 

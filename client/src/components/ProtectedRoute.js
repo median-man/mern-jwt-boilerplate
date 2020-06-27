@@ -4,7 +4,7 @@ import { useAuth } from "../utils/auth";
 
 // Redirects to given path if user is not logged in. Defaults to /login if
 // the user is not logged in.
-const ProtectedRoute = ({ onFailureRedirectToPath = "/login", ...rest }) => {
+const ProtectedRoute = ({ onFailureRedirectToPath = "/", ...rest }) => {
   const { isLoggedIn } = useAuth();
   return isLoggedIn ? (
     <Route {...rest} />

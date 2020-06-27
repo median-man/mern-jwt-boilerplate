@@ -14,13 +14,13 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <ProtectedRoute exact path="/" onFailureRedirectToPath="/login">
+          <ProtectedRoute exact path="/employee" onFailureRedirectToPath="/">
             <Employeehome />
           </ProtectedRoute>
-          <ProtectedRoute exact path="/boss" onFailureRedirectToPath="/login">
+          <ProtectedRoute exact path="/boss" onFailureRedirectToPath="/">
             <Bosshome />
           </ProtectedRoute>
-          <Route exact path="/login">
+          <Route exact path={['/', 'login']}>
             <Login />
           </Route>
           <Route exact path="/signup">

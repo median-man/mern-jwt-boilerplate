@@ -81,6 +81,10 @@ app.get("/api/users/:id", authenticate(), (req, res) => {
   });
 });
 
+app.get("/api/allemployees", (req, res) =>{
+  User.find({boss: false}).then(dbUsers => res.json(dbUsers))
+})
+
 // Serve static assets in production only
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
